@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-/*
+
 #define SIZE 100
 
 void rand_arr(int arr[SIZE])
@@ -70,4 +70,3 @@ int main_12()
 
 	return 0;
 }
-*/
