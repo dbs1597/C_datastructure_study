@@ -19,7 +19,7 @@ int is_full(StackType* s);
 void push(StackType* s, int value);
 int pop(StackType* s);
 int top_value(StackType* s);
-int cmpr_str(int value, const char str[]);
+int cmpr_str(int value, char str[]);
 void print_intstack(StackType* s);
 
 
@@ -43,20 +43,13 @@ int main()
 		if (input_equation[i] == '+' || input_equation[i] == '-')
 		{
 			// 현재 top에 해당하는 값과 '(', '+', '-' 을 비교하여 같지 않은 경우 operator_stack의 값을 pop하여 result_stack에 push함
-			while (!cmpr_str(top_value(&operator_stack), "(") && operator_stack.top != -1)
+			while (!cmpr_str(top_value(&operator_stack), "(+-") && operator_stack.top != -1)
 				push(&result_stack, pop(&operator_stack));
 			push(&operator_stack, input_equation[i]);
 		}
 		// '*', '/', '(' 을 확인하면 operator_stack에 쌓아둠
-		else if (input_equation[i] == '*' || input_equation[i] == '/')
-		{
-			while (!cmpr_str(top_value(&operator_stack), "(+-"))
-				push(&result_stack, pop(&operator_stack));
+		else if (input_equation[i] == '*' || input_equation[i] == '/' || input_equation[i] == '(')
 			push(&operator_stack, input_equation[i]);
-		}
-
-		else if (input_equation[i] == '(') push(&operator_stack, input_equation[i]);
-
 		// ')' 을 확인하면 앞선 '('를 operator_stack에서 확인하기 전까지의 모든 연산자를 result_stack에 순서대로 push 함
 		else if (input_equation[i] == ')')
 		{
@@ -140,7 +133,7 @@ int top_value(StackType* s)
 }
 
 // 문자열에 해당 값이 있는지 비교
-int cmpr_str(int value, const char str[])
+int cmpr_str(int value, char str[])
 {
 	int temp = 0;
 	for (int i = 0; i < strlen(str); i++) if (value == str[i]) temp++;
@@ -152,6 +145,6 @@ int cmpr_str(int value, const char str[])
 void print_intstack(StackType* s)
 {
 	for (int i = 0; i <= s->top; i++)
-		printf("%c ", s->arr[i]);
+		printf("%c", s->arr[i]);
 	return;
 }
