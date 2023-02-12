@@ -47,7 +47,7 @@ int main()
 				push(&result_stack, pop(&operator_stack));
 			push(&operator_stack, input_equation[i]);
 		}
-		// '*', '/', '(' À» È®ÀÎÇÏ¸é operator_stack¿¡ ½×¾ÆµÒ
+		// '*', '/', À» È®ÀÎÇÏ¸é operator_stack¿¡ ½×¾ÆµÒ
 		else if (input_equation[i] == '*' || input_equation[i] == '/')
 		{
 			while (!cmpr_str(top_value(&operator_stack), "(+-"))
