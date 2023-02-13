@@ -31,7 +31,7 @@ xy pop() {
 void DFS(int x_goal, int y_goal) {
 
 	xy init, prev;
-	int x, y, i;
+	int x, y, i, push_cnt = 0;
 
 	init = pop();
 
@@ -48,6 +48,7 @@ void DFS(int x_goal, int y_goal) {
 			printf("%d %d\n", path[i].x, path[i].y);
 		}
 
+		exit(1);
 		return;
 	}
 
@@ -57,6 +58,7 @@ void DFS(int x_goal, int y_goal) {
 			push(x, y);
 			push(x - 1, y);
 			DFS(x_goal, y_goal);
+			push_cnt++;
 		}
 	}
 	
@@ -66,6 +68,7 @@ void DFS(int x_goal, int y_goal) {
 			push(x, y);
 			push(x, y + 1);
 			DFS(x_goal, y_goal);
+			push_cnt++;
 		}
 	}
 
@@ -75,6 +78,7 @@ void DFS(int x_goal, int y_goal) {
 			push(x, y);
 			push(x + 1, y);
 			DFS(x_goal, y_goal);
+			push_cnt++;
 		}
 	}
 
@@ -84,14 +88,27 @@ void DFS(int x_goal, int y_goal) {
 			push(x, y);
 			push(x, y - 1);
 			DFS(x_goal, y_goal);
+			push_cnt++;
 		}
 	}
 
+	pop();
 
+	/*
+	if (path[path_top].x == x && path[path_top].y == y){
+		pop();
+	}
+	*/
+	/*
+	if (push_cnt == 0) {
+		pop();
+	}
+	*/
+
+	return;
 }
 
 int main() {
-
 	
 	int i, j;
 	FILE* fp;
